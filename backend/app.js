@@ -6,7 +6,10 @@ const routes = require('./routes');
 
 const app = express();
 
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
+const corsOrigin = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map((origin) => origin.trim())
+  : '*';
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 
 app.get('/health', (_req, res) => {

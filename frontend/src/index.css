@@ -1,6 +1,6 @@
 :root {
-  --navy: #0f2744;
-  --navy-light: #1e3a5f;
+  --navy: #0a0a0a;
+  --navy-light: #1f1f1f;
   --gold: #c9a227;
   --gold-light: #e8c547;
   --bg: #f4f6f9;
@@ -13,9 +13,9 @@
   --danger: #dc2626;
   --radius: 12px;
   --radius-sm: 8px;
-  --shadow: 0 1px 3px rgba(15, 39, 68, 0.08);
-  --shadow-md: 0 8px 24px rgba(15, 39, 68, 0.1);
-  --shadow-lg: 0 20px 50px rgba(15, 39, 68, 0.15);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
   --font: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
 }
@@ -546,7 +546,7 @@ th {
 
 .property-image-placeholder {
   height: 100%;
-  background: linear-gradient(135deg, var(--navy-light) 0%, #2d5a8a 100%);
+  background: linear-gradient(135deg, var(--navy-light) 0%, #333333 100%);
   display: flex;
   align-items: flex-end;
   padding: 1rem;
@@ -836,7 +836,7 @@ th {
 }
 
 .auth-brand {
-  background: linear-gradient(160deg, var(--navy) 0%, #1a4a7a 50%, var(--navy-light) 100%);
+  background: linear-gradient(160deg, var(--navy) 0%, #262626 50%, var(--navy-light) 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -988,6 +988,166 @@ th {
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Home page */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.home-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: white;
+  border-radius: var(--radius);
+  padding: 3rem 2.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.home-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+}
+
+.home-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.home-lead {
+  max-width: 640px;
+  opacity: 0.9;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.home-cta {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.home-hero .btn-ghost {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.home-hero .btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.home-section-header {
+  margin-bottom: 1.5rem;
+}
+
+.home-section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+}
+
+.home-section-subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.architecture-figure {
+  padding: 0;
+  overflow: hidden;
+}
+
+.architecture-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.architecture-caption {
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.tier-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tier-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.tier-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.tier-tech {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--navy-light);
+}
+
+.tier-description {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.tier-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.tier-meta dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.tier-meta dd {
+  font-size: 0.85rem;
+}
+
+.tier-meta code {
+  background: var(--bg);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--navy);
 }
 
 /* Responsive nav */
