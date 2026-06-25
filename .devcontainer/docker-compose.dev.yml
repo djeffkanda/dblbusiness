@@ -1,0 +1,22 @@
+# Dev container overlay — application + presentation development environment
+
+services:
+  dev:
+    image: mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm
+    container_name: bldbusiness-dev
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    environment:
+      DB_HOST: data-tier
+      DB_PORT: "3306"
+      DB_USER: ${DB_USER:-appuser}
+      DB_PASSWORD: ${DB_PASSWORD:-apppass}
+      DB_NAME: ${DB_NAME:-bldbusiness}
+      PORT: "3200"
+      VITE_API_URL: http://localhost:3200/api
+    depends_on:
+      data-tier:
+        condition: service_healthy
+    networks:
+      - bldbusiness-net

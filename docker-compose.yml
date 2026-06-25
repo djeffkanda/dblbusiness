@@ -1,0 +1,49 @@
+# Local development — mirrors AWS 3-tier separation
+#   data-tier      → mysql
+#   application-tier → backend (run manually or via devcontainer)
+#   presentation-tier → frontend (run manually or via devcontainer)
+
+services:
+  data-tier:
+    image: mysql:8.0
+    container_name: bldbusiness-data-tier
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${DB_NAME:-bldbusiness}
+      MYSQL_USER: ${DB_USER:-appuser}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-apppass}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./data-tier/db.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-rootpass}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bldbusiness-net
+
+  # Optional: test presentation-tier locally with NGINX (production-like)
+  presentation-tier:
+    image: nginx:1.27-alpine
+    container_name: bldbusiness-presentation-tier
+    profiles: ["production-like"]
+    ports:
+      - "${PRESENTATION_PORT:-8080}:80"
+    volumes:
+      - ./deploy/presentation-tier/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - data-tier
+    networks:
+      - bldbusiness-net
+
+volumes:
+  mysql_data:
+
+networks:
+  bldbusiness-net:
+    driver: bridge
